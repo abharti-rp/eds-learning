@@ -3,9 +3,9 @@ import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 import { getPageName, getAssestMetadata } from '../../scripts/utils.js';
 
-export default async function decorate(block) {
+export default function decorate(block) {
   const pageName = getPageName();
-  console.log("PageName: ", pageName);
+  console.log('PageName: ', pageName);
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
@@ -24,9 +24,9 @@ export default async function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
   block.replaceChildren(ul);
-  const elements = [...ul.querySelectorAll("a")];
-  for (const elementA of elements) {
-    const metadata = await getAssestMetadata(elementA.href);
-    console.log("metadata for ", elementA.href, metadata);
-  }
+  ul.querySelectorAll('a').forEach((elementA) => {
+    getAssestMetadata(elementA.href).then((metadata) => {
+      console.log('metadata for ', elementA.href, metadata);
+    });
+  });
 }
