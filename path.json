@@ -1,0 +1,10 @@
+{
+  "mappings": [
+    "/content/ashu-eds-learning/:/",
+    "/content/ashu-eds-learning/configuration:/.helix/config.json",
+    "/content/ashu-eds-learning/metadata:/metadata.json"
+  ],
+  "includes": [
+    "/content/ashu-eds-learning/"
+  ]
+}
