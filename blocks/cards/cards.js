@@ -1,7 +1,11 @@
+/* eslint-disable no-console */
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
+import { getPageName, getAssestMetadata } from '../../scripts/utils.js';
 
-export default function decorate(block) {
+export default async function decorate(block) {
+  const pageName = getPageName();
+  console.log("PageName: ", pageName);
   /* change to ul, li */
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
@@ -20,4 +24,9 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
   block.replaceChildren(ul);
+  const elements = [...ul.querySelectorAll("a")];
+  for (const elementA of elements) {
+    const metadata = await getAssestMetadata(elementA.href);
+    console.log("metadata for ", elementA.href, metadata);
+  }
 }
