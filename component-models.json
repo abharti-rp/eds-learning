@@ -223,23 +223,20 @@
         "name": "source",
         "label": "Video Source",
         "description": "Link to YouTube, Vimeo, or MP4 video file",
-        "value": "",
-        "valueType": "string"
+        "multi": false
       },
       {
         "component": "reference",
         "name": "image",
         "label": "Placeholder Image",
         "description": "Optional image to display before video playback",
-        "value": "",
-        "valueType": "string"
+        "multi": false
       },
       {
         "component": "multiselect",
-        "name": "options",
-        "label": "Options",
+        "name": "style",
+        "label": "Video playback",
         "description": "Video playback options",
-        "value": [],
         "options": [
           {
             "name": "autoplay",
