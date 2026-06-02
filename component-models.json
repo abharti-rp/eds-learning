@@ -214,5 +214,38 @@
         "valueType": "string"
       }
     ]
+  },
+  {
+    "id": "video",
+    "fields": [
+      {
+        "component": "aem-content",
+        "name": "source",
+        "label": "Video Source",
+        "description": "Link to YouTube, Vimeo, or MP4 video file"
+      },
+      {
+        "component": "aem-content",
+        "name": "image",
+        "label": "Placeholder Image",
+        "description": "Optional image to display before video playback"
+      },
+      {
+        "component": "multiselect",
+        "name": "style",
+        "label": "Video playback",
+        "description": "Video playback options",
+        "options": [
+          {
+            "name": "autoplay",
+            "value": "autoplay"
+          },
+          {
+            "name": "background",
+            "value": "background"
+          }
+        ]
+      }
+    ]
   }
 ]
