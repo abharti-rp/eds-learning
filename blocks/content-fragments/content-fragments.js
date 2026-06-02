@@ -11,25 +11,25 @@ async function fetchContentFragmentData(cfPath) {
 }
 
 export default function decorate(block) {
-  const divEle = document.createElement('div');
-  divEle.className = 'cf-wrapper';
-  const cfPath = block.dataset.cf;
+  const articleEle = document.createElement('article');
+  articleEle.className = 'cf-wrapper';
+  const cfPath = block.dataset.fragmentPath;
   fetchContentFragmentData(cfPath)
     .then((data) => {
       console.log(data);
       const titleEle = document.createElement('h2');
       const descriptionEle = document.createElement('p');
       const optimizedPic = createOptimizedPicture(data.articleBannerPath, data.articleTitle, false, [{ width: '750' }]);
-      divEle.append(optimizedPic, titleEle, descriptionEle);
-      block.innerHTML = '';
-      block.append(divEle);
+      articleEle.append(optimizedPic, titleEle, descriptionEle);
+      // block.innerHTML = '';
+      block.append(articleEle);
     })
     .catch((err) => {
       console.error(err);
       const errorEle = document.createElement('p');
       errorEle.innerHTML = 'Something went wrong!';
       errorEle.className = 'cf-error';
-      divEle.append(errorEle);
-      block.append(divEle);
+      articleEle.append(errorEle);
+      block.append(articleEle);
     });
 }

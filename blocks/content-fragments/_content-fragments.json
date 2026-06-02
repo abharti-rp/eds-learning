@@ -43,8 +43,8 @@
       "id": "content-fragment",
       "fields": [
         {
-          "component": "content-fragment",
-          "name": "picker",
+          "component": "reference",
+          "name": "fragmentPath",
           "label": "Content Fragment Picker",
           "valueType": "string",
           "validation": {
