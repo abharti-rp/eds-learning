@@ -128,6 +128,19 @@
           }
         },
         {
+          "title": "Content Fragments",
+          "id": "aem-content-fragment",
+          "plugins": {
+            "xwalk": {
+              "cf": {
+                "name": "Article CF",
+                "cfModel": "EDS Article Model",
+                "cfFolder": "articles"
+              }
+            }
+          }
+        },
+        {
           "title": "Fragment",
           "id": "fragment",
           "plugins": {

@@ -180,6 +180,20 @@
     ]
   },
   {
+    "id": "aem-content-fragment",
+    "fields": [
+      {
+        "component": "aem-content-fragment",
+        "name": "picker",
+        "label": "Content Fragment Picker",
+        "valueType": "string",
+        "validation": {
+          "rootPath": "/content/dam/ashu-eds-learning/articles"
+        }
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {

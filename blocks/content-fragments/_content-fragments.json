@@ -1,0 +1,34 @@
+{
+  "definitions": [
+    {
+      "title": "Content Fragments",
+      "id": "aem-content-fragment",
+      "plugins": {
+        "xwalk": {
+          "cf": {
+            "name": "Article CF",
+            "cfModel": "EDS Article Model",
+            "cfFolder": "articles"
+          }
+        }
+      }
+    }
+  ],
+  "models": [
+    {
+      "id": "aem-content-fragment",
+      "fields": [
+        {
+          "component": "aem-content-fragment",
+          "name": "picker",
+          "label": "Content Fragment Picker",
+          "valueType": "string",
+          "validation": {
+            "rootPath": "/content/dam/ashu-eds-learning/articles"
+          }
+        }
+      ]
+    }
+  ],
+  "filters": []
+}
