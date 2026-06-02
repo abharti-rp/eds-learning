@@ -180,10 +180,10 @@
     ]
   },
   {
-    "id": "content-fragments",
+    "id": "content-fragment",
     "fields": [
       {
-        "component": "content-fragments",
+        "component": "content-fragment",
         "name": "picker",
         "label": "Content Fragment Picker",
         "valueType": "string",

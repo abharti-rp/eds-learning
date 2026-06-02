@@ -40,5 +40,11 @@
       "button",
       "title"
     ]
+  },
+  {
+    "id": "content-fragments",
+    "components": [
+      "content-fragment"
+    ]
   }
 ]
