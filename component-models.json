@@ -180,10 +180,10 @@
     ]
   },
   {
-    "id": "aem-content-fragment",
+    "id": "content-fragments",
     "fields": [
       {
-        "component": "aem-content-fragment",
+        "component": "content-fragments",
         "name": "picker",
         "label": "Content Fragment Picker",
         "valueType": "string",
