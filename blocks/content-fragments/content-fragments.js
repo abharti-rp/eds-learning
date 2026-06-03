@@ -5,10 +5,14 @@ import { isAuthorEnvironment, moveInstrumentation, moveAttributes } from '../../
 const configObj = {
   AUTHOR_PATH: 'https://author-p133739-e1306963.adobeaemcloud.com',
   PUBLISH_PATH: 'https://publish-p133739-e1306963.adobeaemcloud.com',
+  GRAPHQL_BASE: '/graphql/execute.json/global/article-by-path-variation;articlePath=',
+  VARIATION: ';variation=',
 };
 
 async function fetchContentFragmentData(cfPath) {
-  const response = await fetch(cfPath);
+  const response = await fetch(cfPath, {
+    headers: { 'Content-Type': 'application/json' },
+  });
   if (!response.ok) {
     return null;
   }
@@ -22,20 +26,22 @@ export default function decorate(block) {
     const articleEle = document.createElement('article');
     articleEle.className = 'cf-wrapper';
     let cfPath = row.querySelector('div a')?.textContent?.trim();
+    const variation = row.querySelector('div:nth-child(2)')?.textContent?.trim();
     if (cfPath) {
       const baseUrl = isAuthor ? configObj.AUTHOR_PATH : configObj.PUBLISH_PATH;
-      cfPath = `${baseUrl}${cfPath}/jcr:content/data/master.json`;
+      cfPath = baseUrl + configObj.GRAPHQL_BASE + cfPath;
+      if (variation) {
+        cfPath = cfPath + configObj.VARIATION + variation;
+      }
     }
-    console.log(row, cfPath);
     moveInstrumentation(row, articleEle);
     moveAttributes(row, articleEle);
     row.replaceWith(articleEle);
-    fetchContentFragmentData(cfPath, {
-      headers: { 'Content-Type': 'application/json' },
-    })
-      .then((data) => {
-        console.log(data);
-        const titleEle = document.createElement('h2');
+    fetchContentFragmentData(cfPath)
+      .then((resp) => {
+        console.log(resp);
+        const data = resp.data.edsArticleModelByPath.item;
+        const titleEle = document.createElement('h3');
         const descriptionEle = document.createElement('p');
         if (data.articleBannerPath) {
           const optimizedPic = createOptimizedPicture(data.articleBannerPath, data.articleTitle, false, [{ width: '750' }]);

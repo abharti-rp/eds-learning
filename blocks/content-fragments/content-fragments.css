@@ -1,3 +1,9 @@
+.content-fragments {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(226px, 1fr));
+  gap: 12px;
+}
+
 .content-fragments .cf-wrapper {
   display: flex;
   flex-direction: column;
