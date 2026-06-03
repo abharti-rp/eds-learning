@@ -48,9 +48,9 @@ export function moveInstrumentation(from, to) {
 export function isAuthorEnvironment() {
   if (window?.location?.origin?.includes('author')) {
     return true;
-  } else {
-    return false;
   }
+
+  return false;
 }
 
 /**

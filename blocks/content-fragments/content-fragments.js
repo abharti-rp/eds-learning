@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import { moveInstrumentation, isAuthorEnvironment } from '../../scripts/scripts.js';
+import { isAuthorEnvironment } from '../../scripts/scripts.js';
 
-const config_obj = {
+const configObj = {
   AUTHOR_PATH: 'https://author-p133739-e1306963.adobeaemcloud.com',
-  PUBLISH_PATH: 'https://publish-p133739-e1306963.adobeaemcloud.com'
+  PUBLISH_PATH: 'https://publish-p133739-e1306963.adobeaemcloud.com',
 };
 
 async function fetchContentFragmentData(cfPath) {
@@ -23,14 +23,14 @@ export default function decorate(block) {
     articleEle.className = 'cf-wrapper';
     let cfPath = row.querySelector('div a')?.textContent?.trim();
     if (cfPath) {
-      const baseUrl = isAuthor ? config_obj.AUTHOR_PATH : config_obj.PUBLISH_PATH;
+      const baseUrl = isAuthor ? configObj.AUTHOR_PATH : configObj.PUBLISH_PATH;
       cfPath = `${baseUrl}${cfPath}/jcr:content/data/master.json`;
     }
     console.log(row, cfPath);
     row.replaceWith(articleEle);
     // moveInstrumentation(row, articleEle);
     fetchContentFragmentData(cfPath, {
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
     })
       .then((data) => {
         console.log(data);
