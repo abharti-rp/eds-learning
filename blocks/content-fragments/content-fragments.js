@@ -8,7 +8,7 @@ const configObj = {
 };
 
 async function fetchContentFragmentData(cfPath) {
-  const response = await fetch(`${cfPath}.json`);
+  const response = await fetch(cfPath);
   if (!response.ok) {
     return null;
   }
