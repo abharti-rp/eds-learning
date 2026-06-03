@@ -153,13 +153,20 @@
                   "name": "Content Fragment",
                   "model": "content-fragment"
                 }
-              },
+              }
+            },
+            "aem": {
               "cf": {
                 "name": "Article CF",
-                "cfModel": "EDS Article Model",
-                "cfFolder": "articles",
+                "cfModel": "/conf/global/settings/dam/cfm/models/eds-article-model",
+                "cfFolder": "/content/dam/ashu-eds-learning/articles",
                 "title": "New Content Fragment",
-                "description": "New Content Fragment Description"
+                "description": "New Content Fragment Description",
+                "template": {
+                  "articleTitle": "Article Title",
+                  "articleDescription": "Article Description",
+                  "articleBannerPath": ""
+                }
               }
             }
           }

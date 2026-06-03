@@ -19,8 +19,18 @@ export default function decorate(block) {
       console.log(data);
       const titleEle = document.createElement('h2');
       const descriptionEle = document.createElement('p');
-      const optimizedPic = createOptimizedPicture(data.articleBannerPath, data.articleTitle, false, [{ width: '750' }]);
-      articleEle.append(optimizedPic, titleEle, descriptionEle);
+      if (data.articleBannerPath) {
+        const optimizedPic = createOptimizedPicture(data.articleBannerPath, data.articleTitle, false, [{ width: '750' }]);
+        articleEle.append(optimizedPic);
+      }
+      if (data.articleTitle) {
+        titleEle.innerText = data.articleTitle;
+        articleEle.append(titleEle);
+      }
+      if (data.articleDescription) {
+        descriptionEle.innerText = data.articleDescription;
+        articleEle.append(descriptionEle);
+      }
       // block.innerHTML = '';
       block.append(articleEle);
     })

@@ -184,11 +184,29 @@
     "fields": [
       {
         "component": "aem-content-fragment",
-        "name": "fragmentPath",
+        "name": "reference",
         "label": "Content Fragment Picker",
         "valueType": "string",
+        "required": true,
+        "variationName": "contentFragmentVariation",
         "validation": {
           "rootPath": "/content/dam/ashu-eds-learning/articles"
+        }
+      },
+      {
+        "component": "text",
+        "name": "contentFragmentVariation",
+        "label": "Selected Variation",
+        "value": "",
+        "valueType": "string",
+        "description": "Persisted variation for publish; leave empty for master.",
+        "condition": {
+          "==": [
+            {
+              "var": "__alwaysFalse"
+            },
+            true
+          ]
         }
       }
     ]
