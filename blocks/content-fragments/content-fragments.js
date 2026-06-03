@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import { isAuthorEnvironment } from '../../scripts/scripts.js';
+import { isAuthorEnvironment, moveInstrumentation, moveAttributes } from '../../scripts/scripts.js';
 
 const configObj = {
   AUTHOR_PATH: 'https://author-p133739-e1306963.adobeaemcloud.com',
@@ -27,8 +27,9 @@ export default function decorate(block) {
       cfPath = `${baseUrl}${cfPath}/jcr:content/data/master.json`;
     }
     console.log(row, cfPath);
+    moveInstrumentation(row, articleEle);
+    moveAttributes(row, articleEle);
     row.replaceWith(articleEle);
-    // moveInstrumentation(row, articleEle);
     fetchContentFragmentData(cfPath, {
       headers: { 'Content-Type': 'application/json' },
     })
