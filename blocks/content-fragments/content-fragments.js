@@ -1,5 +1,11 @@
 /* eslint-disable no-console */
 import { createOptimizedPicture } from '../../scripts/aem.js';
+import { moveInstrumentation, isAuthorEnvironment } from '../../scripts/scripts.js';
+
+const config_obj = {
+  AUTHOR_PATH: 'https://author-p133739-e1306963.adobeaemcloud.com',
+  PUBLISH_PATH: 'https://publish-p133739-e1306963.adobeaemcloud.com'
+};
 
 async function fetchContentFragmentData(cfPath) {
   const response = await fetch(`${cfPath}.json`);
@@ -11,35 +17,44 @@ async function fetchContentFragmentData(cfPath) {
 }
 
 export default function decorate(block) {
-  const articleEle = document.createElement('article');
-  articleEle.className = 'cf-wrapper';
-  const cfPath = block.dataset.fragmentPath;
-  fetchContentFragmentData(cfPath)
-    .then((data) => {
-      console.log(data);
-      const titleEle = document.createElement('h2');
-      const descriptionEle = document.createElement('p');
-      if (data.articleBannerPath) {
-        const optimizedPic = createOptimizedPicture(data.articleBannerPath, data.articleTitle, false, [{ width: '750' }]);
-        articleEle.append(optimizedPic);
-      }
-      if (data.articleTitle) {
-        titleEle.innerText = data.articleTitle;
-        articleEle.append(titleEle);
-      }
-      if (data.articleDescription) {
-        descriptionEle.innerText = data.articleDescription;
-        articleEle.append(descriptionEle);
-      }
-      // block.innerHTML = '';
-      block.append(articleEle);
+  const isAuthor = isAuthorEnvironment();
+  [...block.children].forEach((row) => {
+    const articleEle = document.createElement('article');
+    articleEle.className = 'cf-wrapper';
+    let cfPath = row.querySelector('div a')?.textContent?.trim();
+    if (cfPath) {
+      const baseUrl = isAuthor ? config_obj.AUTHOR_PATH : config_obj.PUBLISH_PATH;
+      cfPath = `${baseUrl}${cfPath}/jcr:content/data/master.json`;
+    }
+    console.log(row, cfPath);
+    row.replaceWith(articleEle);
+    // moveInstrumentation(row, articleEle);
+    fetchContentFragmentData(cfPath, {
+      headers: { 'Content-Type': 'application/json' }
     })
-    .catch((err) => {
-      console.error(err);
-      const errorEle = document.createElement('p');
-      errorEle.innerHTML = 'Something went wrong!';
-      errorEle.className = 'cf-error';
-      articleEle.append(errorEle);
-      block.append(articleEle);
-    });
+      .then((data) => {
+        console.log(data);
+        const titleEle = document.createElement('h2');
+        const descriptionEle = document.createElement('p');
+        if (data.articleBannerPath) {
+          const optimizedPic = createOptimizedPicture(data.articleBannerPath, data.articleTitle, false, [{ width: '750' }]);
+          articleEle.append(optimizedPic);
+        }
+        if (data.articleTitle) {
+          titleEle.innerText = data.articleTitle;
+          articleEle.append(titleEle);
+        }
+        if (data.articleDescription) {
+          descriptionEle.innerText = data.articleDescription;
+          articleEle.append(descriptionEle);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        const errorEle = document.createElement('p');
+        errorEle.innerHTML = 'Something went wrong!';
+        errorEle.className = 'cf-error';
+        articleEle.append(errorEle);
+      });
+  });
 }
