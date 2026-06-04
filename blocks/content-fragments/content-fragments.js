@@ -5,8 +5,8 @@ import { isAuthorEnvironment, moveInstrumentation, moveAttributes } from '../../
 const configObj = {
   AUTHOR_PATH: 'https://author-p133739-e1306963.adobeaemcloud.com',
   PUBLISH_PATH: 'https://publish-p133739-e1306963.adobeaemcloud.com',
-  GRAPHQL_BASE: '/graphql/execute.json/global/article-by-path-variation;articlePath=',
-  VARIATION: ';variation=',
+  GRAPHQL_BASE: '/graphql/execute.json/global/article-by-path-variation%3BarticlePath%3D',
+  VARIATION: '%3Bvariation%3D',
 };
 
 async function fetchContentFragmentData(cfPath) {
@@ -29,9 +29,9 @@ export default function decorate(block) {
     const variation = row.querySelector('div:nth-child(2)')?.textContent?.trim();
     if (cfPath) {
       const baseUrl = isAuthor ? configObj.AUTHOR_PATH : configObj.PUBLISH_PATH;
-      cfPath = baseUrl + configObj.GRAPHQL_BASE + cfPath;
+      cfPath = baseUrl + configObj.GRAPHQL_BASE + encodeURI(cfPath);
       if (variation) {
-        cfPath = cfPath + configObj.VARIATION + variation;
+        cfPath = cfPath + configObj.VARIATION + encodeURI(variation);
       }
     }
     moveInstrumentation(row, articleEle);
