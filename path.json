@@ -8,7 +8,6 @@
   ],
   "includes": [
     "/content/ashu-eds-msm/",
-    "/content/dam/ashu-eds-msm/en/",
-    "/content/dam/ashu-eds-msm/es/"
+    "/content/dam/ashu-eds-msm/"
   ]
 }
