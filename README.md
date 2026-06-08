@@ -1,5 +1,5 @@
-# Your Project's Title...
-Your project's description...
+# EDS Learning
+Learning project for Adobe Helix (EDS).
 
 ## Environments
 - Preview: https://main--eds-learning--abharti-rp.aem.page/
