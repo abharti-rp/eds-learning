@@ -1,5 +1,8 @@
 {
   "mappings": [
+    "/content/ashu-eds-learning/:/",
+    "/content/ashu-eds-learning/configuration:/.helix/config.json",
+    "/content/ashu-eds-learning/metadata:/metadata.json",
     "/content/ashu-eds-msm/:/",
     "/content/ashu-eds-msm/configuration:/.helix/config.json",
     "/content/ashu-eds-msm/metadata:/metadata.json",
@@ -7,7 +10,7 @@
     "/content/ashu-eds-msm/language-masters/es/:/es/"
   ],
   "includes": [
-    "/content/ashu-eds-msm/",
-    "/content/dam/ashu-eds-msm/"
+    "/content/ashu-eds-learning/",
+    "/content/ashu-eds-msm/"
   ]
 }
